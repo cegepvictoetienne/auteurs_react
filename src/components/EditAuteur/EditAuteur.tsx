@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../contexts/LoginContext';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function EditAuteur() {
   const { setPageRedirectAfterLogin, token } = useContext(LoginContext);
@@ -11,6 +11,8 @@ function EditAuteur() {
   const [dateNaissance, setDateNaissance] = useState('');
 
   const { auteurid } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPageRedirectAfterLogin('/edit/' + auteurid);
@@ -65,6 +67,9 @@ function EditAuteur() {
       )
       .then((response) => {
         console.log('Auteur modifié avec succès:', response.data);
+      })
+      .then(() => {
+        navigate('/');
       })
       .catch((error) => {
         console.error("Erreur lors de la modification de l'auteur:", error);

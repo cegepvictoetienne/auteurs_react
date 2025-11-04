@@ -5,7 +5,6 @@ import axios from 'axios';
 
 interface IAuteur {
   _id: string;
-  id: string;
   prenom: string;
   nom: string;
   dateNaissance: string;
@@ -45,7 +44,7 @@ function UserList() {
         },
       )
       .then(() => {
-        setAuteursList(auteursList.filter((auteur) => auteur.id !== auteurId));
+        setAuteursList(auteursList.filter((auteur) => auteur._id !== auteurId));
       })
       .catch((error) => {
         console.error("Erreur lors de la suppression de l'auteur:", error);
@@ -68,13 +67,13 @@ function UserList() {
               <div className="flex flex-row px-3 py-4">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm py-1 px-1 rounded-full mr-4"
-                  onClick={() => handleEdit(auteur.id)}
+                  onClick={() => handleEdit(auteur._id)}
                 >
                   Éditer
                 </button>
                 <button
                   className="bg-red-500 hover:bg-red-700 text-white font-bold text-sm py-1 px-1 rounded-full"
-                  onClick={() => handleDelete(auteur.id)}
+                  onClick={() => handleDelete(auteur._id)}
                 >
                   Supprimer
                 </button>

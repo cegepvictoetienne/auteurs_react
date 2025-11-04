@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 function EditAuteur() {
   const { setPageRedirectAfterLogin, token } = useContext(LoginContext);
   const [_id, set_Id] = useState('');
-  const [id, setId] = useState('');
   const [prenom, setPrenom] = useState('');
   const [nom, setNom] = useState('');
   const [dateNaissance, setDateNaissance] = useState('');
@@ -29,9 +28,8 @@ function EditAuteur() {
           },
         )
         .then((response) => {
-          const { _id, id, prenom, nom, dateNaissance } = response.data.auteur;
+          const { _id, prenom, nom, dateNaissance } = response.data.auteur;
           set_Id(_id);
-          setId(id);
           setPrenom(prenom);
           setNom(nom);
           setDateNaissance(dateNaissance);
@@ -48,7 +46,6 @@ function EditAuteur() {
     // former les données de l'auteur à envoyer
     const auteur = {
       _id,
-      id,
       prenom,
       nom,
       dateNaissance,
@@ -80,20 +77,6 @@ function EditAuteur() {
         Modification d'un auteur
       </h2>
       <form>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            ID
-          </label>
-          <input
-            type="text"
-            id="id"
-            name="id"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Enter ID"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
-        </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Prénom

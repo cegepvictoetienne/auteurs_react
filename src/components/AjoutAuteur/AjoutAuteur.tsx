@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function AjoutAuteur() {
   const { setPageRedirectAfterLogin, token } = useContext(LoginContext);
-  const [id, setId] = useState('');
   const [prenom, setPrenom] = useState('');
   const [nom, setNom] = useState('');
   const [dateNaissance, setDateNaissance] = useState('');
@@ -21,7 +20,6 @@ function AjoutAuteur() {
 
     // former les données de l'auteur à envoyer
     const auteur = {
-      id,
       prenom,
       nom,
       dateNaissance,
@@ -53,19 +51,6 @@ function AjoutAuteur() {
         Ajout d'un auteur
       </h2>
       <form>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            ID
-          </label>
-          <input
-            type="text"
-            id="id"
-            name="id"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Enter ID"
-            onChange={(e) => setId(e.target.value)}
-          />
-        </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Prénom

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../contexts/LoginContext';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../constants';
 import axios from 'axios';
 
 interface IAuteur {
@@ -21,28 +22,22 @@ function UserList() {
       navigate('/login');
     } else {
       axios
-        .get(
-          'https://auteursapi-f0h4cgfxg9ceauh3.canadacentral-01.azurewebsites.net/api/auteurs/all',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        .get(`${API_BASE_URL}/auteurs/all`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        )
+        })
         .then((response) => setAuteursList(response.data.auteurs));
     }
   }, [isLoggedIn]);
 
   function handleDelete(auteurId: string) {
     axios
-      .delete(
-        `https://auteursapi-f0h4cgfxg9ceauh3.canadacentral-01.azurewebsites.net/api/auteurs/delete/${auteurId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .delete(`${API_BASE_URL}/auteurs/delete/${auteurId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then(() => {
         setAuteursList(auteursList.filter((auteur) => auteur._id !== auteurId));
       })

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../contexts/LoginContext';
 import axios from 'axios';
+import { API_BASE_URL } from '../../constants';
 import { useNavigate } from 'react-router-dom';
 
 function AjoutAuteur() {
@@ -32,11 +33,7 @@ function AjoutAuteur() {
     };
     console.log(config);
     axios
-      .post(
-        'https://auteursapi-f0h4cgfxg9ceauh3.canadacentral-01.azurewebsites.net/api/auteurs/add',
-        { auteur },
-        config,
-      )
+      .post(`${API_BASE_URL}/auteurs/add`, { auteur }, config)
       .then(() => {
         navigate('/');
       })

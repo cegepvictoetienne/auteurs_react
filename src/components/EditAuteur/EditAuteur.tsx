@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../contexts/LoginContext';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { API_BASE_URL } from '../../constants';
 
 function EditAuteur() {
   const { setPageRedirectAfterLogin, token } = useContext(LoginContext);
@@ -21,14 +22,11 @@ function EditAuteur() {
   useEffect(() => {
     if (auteurid) {
       axios
-        .get(
-          `https://auteursapi-f0h4cgfxg9ceauh3.canadacentral-01.azurewebsites.net/api/auteurs/${auteurid}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        .get(`${API_BASE_URL}/auteurs/${auteurid}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        )
+        })
         .then((response) => {
           const { _id, prenom, nom, dateNaissance } = response.data.auteur;
           set_Id(_id);
@@ -60,11 +58,7 @@ function EditAuteur() {
     };
     console.log(config);
     axios
-      .put(
-        `https://auteursapi-f0h4cgfxg9ceauh3.canadacentral-01.azurewebsites.net/api/auteurs/update`,
-        { auteur },
-        config,
-      )
+      .put(`${API_BASE_URL}/auteurs/update`, { auteur }, config)
       .then((response) => {
         console.log('Auteur modifié avec succès:', response.data);
       })
